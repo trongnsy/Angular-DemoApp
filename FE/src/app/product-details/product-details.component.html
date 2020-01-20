@@ -1,0 +1,15 @@
+<a [routerLink]="['']" class="button fancy-button">Back to list</a>
+
+<div>
+    <img [src]="product.imageSrc">
+
+    <h3>{{product.name}}</h3>
+    <p>Price: {{product.price | currency}}</p>
+    <p *ngIf="outOfStock;else other">Out of stock</p>
+    <ng-template #other>
+        <p>In stock: {{product.instock}} pieces</p>
+    </ng-template>
+
+    <p>Description: {{product.description}}</p>
+    <button [disabled]="outOfStock" (click)="addToCart()">Add to cart</button>
+</div>

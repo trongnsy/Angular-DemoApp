@@ -1,0 +1,19 @@
+.search-box {
+    width: 100%;
+    min-width: 400px;
+    max-width: 440px;
+    min-height: 20px;
+    padding: 8px 16px;
+    margin: 8px 0;
+}
+
+#instock {
+    min-width: 20px;
+    min-height: 20px;
+    vertical-align: middle;
+}
+
+label {
+    font-weight: bold;
+    cursor: pointer;
+}

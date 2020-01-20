@@ -1,0 +1,14 @@
+h3,
+p {
+    padding-left: 16px;
+}
+
+
+/* Image */
+
+img {
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin-right: 30px;
+}

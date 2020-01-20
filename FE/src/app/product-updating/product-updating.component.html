@@ -1,0 +1,30 @@
+<a [routerLink]="['']" class="button fancy-button">Back to list</a>
+
+<form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
+    <div>
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name">
+    </div>
+
+    <div>
+        <label for="description">Description</label>
+        <input id="description" type="text" formControlName="description">
+    </div>
+
+    <div>
+        <label for="price">Price ($)</label>
+        <input id="price" type="number" formControlName="price">
+    </div>
+
+    <div>
+        <label for="instock">In stock</label>
+        <input id="instock" type="number" formControlName="instock">
+    </div>
+
+    <div>
+        <label>Select Image</label>
+        <input id="imageInput" type="file" accept="image/*" disabled="true" (change)="processFile(imageInput)">
+    </div>
+
+    <button class="button" type="submit">Save</button>
+</form>

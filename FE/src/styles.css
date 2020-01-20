@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+    font-family: 'Roboto Condensed';
+    font-size: 16px;
+}
+
+.table {
+    margin-left: 16px;
+}
+
+.row {
+    width: 100%;
+    min-width: 400px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    background-color: #EEEEEE;
+}
+
+.row span {
+    min-height: 30px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.row .name {
+    width: 200px;
+    min-width: 200px;
+}
+
+.red-button {
+    background-color: rgb(255, 0, 128);
+}
+
+
+/* Button */
+
+.button,
+button {
+    display: inline-flex;
+    margin: 8px;
+    align-items: center;
+    padding: 8px 16px;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+}
+
+.button:hover,
+button:hover {
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+.button:disabled,
+button:disabled {
+    opacity: 0.5;
+    cursor: auto;
+}
+
+
+/* Fancy Button */
+
+.fancy-button {
+    background-color: white;
+    color: #1976d2;
+}
+
+.fancy-button i.material-icons {
+    color: #1976d2;
+    padding-right: 4px;
+}
+
+img {
+    cursor: pointer;
+}

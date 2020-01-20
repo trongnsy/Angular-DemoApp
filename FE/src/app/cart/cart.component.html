@@ -1,0 +1,15 @@
+<a [routerLink]="['']" class="button fancy-button">Back to list</a>
+
+<div class="table" *ngIf="items.length > 0; else noItemTmpl">
+    <div class="row" *ngFor="let item of items">
+        <span>{{item.name}}</span>
+        <span>{{item.quantity}} pieces</span>
+        <span>Total price: {{item.price | currency}}</span>
+    </div>
+    <button (click)="purchase()">Purchase</button>
+    <button class="red-button" (click)="clearCart()">Clear Cart</button>
+</div>
+
+<ng-template #noItemTmpl>
+    <p class="none-item">No item selected.</p>
+</ng-template>

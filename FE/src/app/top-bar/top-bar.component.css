@@ -1,0 +1,27 @@
+.card {
+    border-radius: 4px;
+    border: 1px solid #eee;
+    width: 450px;
+    height: 16px;
+    line-height: 24px;
+    padding: 16px;
+    margin: 0 8px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    position: relative;
+}
+
+.card span {
+    margin: 0px 20px;
+}
+
+.cart {
+    width: "40";
+    float: right;
+}

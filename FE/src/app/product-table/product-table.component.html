@@ -1,0 +1,6 @@
+<div class="row" *ngFor="let product of products; index as productId">
+    <span class="name">{{product.name}}</span>
+    <span>{{product.price | currency}}</span>
+
+    <button (click)="goToDetails(productId)">Details</button>
+</div>

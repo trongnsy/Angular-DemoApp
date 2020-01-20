@@ -1,0 +1,8 @@
+<div>
+    <input class="search-box" type="text" [(ngModel)]="text" (change)="onTextChanged()">
+</div>
+
+<div>
+    <input id="instock" type="checkbox" [(ngModel)]="isChecked" (change)="onCheckboxChanged()">
+    <label for="instock">Only show products in stock</label>
+</div>

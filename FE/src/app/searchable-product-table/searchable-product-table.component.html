@@ -1,0 +1,11 @@
+<div class="table">
+    <app-search-bar class="search-bar" (search)="searchTextChange($event)" (showInstockOnly)="checkboxChange($event)"></app-search-bar>
+
+    <app-product-table *ngIf="filteredProducts.length > 0; else noDataTmpl" [products]="filteredProducts"></app-product-table>
+
+    <ng-template #noDataTmpl>
+        <p>No product is matched with your search!</p>
+    </ng-template>
+</div>
+
+<a [routerLink]="['products/add']" class="button fancy-button">Add new product</a>
