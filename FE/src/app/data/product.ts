@@ -4,5 +4,5 @@ export interface IProduct {
     price: number;
     instock: number;
     description?: string;
-    imageSrc?: string;
+    imageSource?: string;
 }

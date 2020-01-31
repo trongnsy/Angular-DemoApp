@@ -15,6 +15,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductUpdatingComponent } from './product-updating/product-updating.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductRowComponent } from './product-row/product-row.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { ProductUpdatingComponent } from './product-updating/product-updating.co
     TopBarComponent,
     CartComponent,
     ProductUpdatingComponent,
+    ProductRowComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { ProductUpdatingComponent } from './product-updating/product-updating.co
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: SearchableProductTableComponent },
       { path: 'products', component: SearchableProductTableComponent },

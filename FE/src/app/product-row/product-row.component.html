@@ -1,0 +1,7 @@
+<div class="row" [@myAnimation]="state" (mouseover)="animateRow($event)" (mouseout)="animateRow($event)">
+    <span class="name">{{product.name}}</span>
+    <span>{{product.price | currency}}</span>
+
+    <button (click)="goToDetails(product.id)">Details</button>
+    <button (click)="addToCart(product)">Add to cart</button>
+</div>

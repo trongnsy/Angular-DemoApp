@@ -1,8 +1,7 @@
 import { IProduct } from './data/product';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 const API_URL = environment.apiUrl;
 
@@ -15,59 +14,39 @@ export class ApiService {
     private http: HttpClient
   ) { }
 
-  login(user: string, password: string): boolean {
-    this.http.post(API_URL + '/login', {user, password});
-
-    return true;
+  getMobiles(): Promise<IProduct[]> {
+    return new Promise<IProduct[]>(resolve => {
+      this.http.get(API_URL + '/mobile/getAll').toPromise()
+        .then(data => {
+          resolve(data as IProduct[]);
+        });
+    });
   }
 
-
-  getMobiles(): Observable<IProduct[]> {
-    try {
-      let products;
-      this.http.get(API_URL + '/mobile')
-        .subscribe(items => { products = items as IProduct[]; });
-
-      return products;
-    } catch (error) {
-      this.handleError(error);
-    }
+  getMobileById(id: number): Promise<IProduct> {
+    return new Promise<IProduct>(resolve => {
+      this.http.get(API_URL + '/mobile/getById/' + id).toPromise()
+        .then(data => {
+          resolve(data as IProduct);
+        });
+    });
   }
 
-  getMobileById(id: number): Observable<IProduct> {
-    try {
-      return this.http.get<IProduct>(API_URL + '/mobile/' + id);
-    } catch (error) {
-      this.handleError(error);
-    }
+  saveMobile(product: IProduct): Promise<IProduct> {
+    return new Promise<IProduct>(resolve => {
+      this.http.post<IProduct>(API_URL + '/mobile/save', product).toPromise()
+        .then(data => {
+          resolve(data as IProduct);
+        });
+    });
   }
 
-  createMobile(product: IProduct): Observable<IProduct> {
-    try {
-      return this.http.post<IProduct>(API_URL + '/mobile', product);
-    } catch (error) {
-      this.handleError(error);
-    }
+  deleteMobileById(id: number): Promise<IProduct[]> {
+    return new Promise(resolve => {
+      this.http.delete(API_URL + '/mobile/delete/' + id).toPromise()
+        .then(data => {
+          resolve(data as IProduct[]);
+        });
+    });
   }
-
-  updateMobile(product: IProduct): Observable<IProduct> {
-    try {
-      return this.http.put<IProduct>(API_URL + '/mobile/' + product.name, product);
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  deleteMobileById(id: number): Observable<null> {
-    try {
-      return this.http.delete<null>(API_URL + '/mobile/' + id);
-    } catch (error) {
-      this.handleError(error);
-    }
-  }
-
-  handleError(error: Response | any) {
-    Observable.throw(error);
-  }
-
 }

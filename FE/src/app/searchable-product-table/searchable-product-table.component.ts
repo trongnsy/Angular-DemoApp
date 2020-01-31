@@ -1,5 +1,6 @@
+import { ApiService } from './../api.service';
 import { Component, OnInit } from '@angular/core';
-import { products } from '../data/products';
+import { IProduct } from '../data/product';
 
 @Component({
   selector: 'app-searchable-product-table',
@@ -7,20 +8,27 @@ import { products } from '../data/products';
   styleUrls: ['./searchable-product-table.component.css']
 })
 export class SearchableProductTableComponent implements OnInit {
-  filteredProducts;
+  products: IProduct[];
+  filteredProducts: IProduct[];
   searchText;
   showInstockOnly;
-  constructor() { }
+  constructor(
+    private api: ApiService
+  ) { }
 
   ngOnInit() {
     this.searchText = '';
     this.showInstockOnly = false;
-    this.filteredProducts = products;
+
+    this.api.getMobiles().then(data => {
+      this.products = data;
+      this.filteredProducts = this.products;
+    });
   }
 
   onSearchChanged() {
     this.filteredProducts =
-    products.filter(p => p.name.toLowerCase().includes(this.searchText.toLowerCase()) && (!this.showInstockOnly || p.instock > 0));
+      this.products.filter(p => p.name.toLowerCase().includes(this.searchText.toLowerCase()) && (!this.showInstockOnly || p.instock > 0));
   }
 
   searchTextChange(event) {

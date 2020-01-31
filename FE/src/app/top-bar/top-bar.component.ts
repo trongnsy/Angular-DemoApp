@@ -1,3 +1,5 @@
+import { CartService } from './../cart.service';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,13 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-  title = 'searchable-product-table';
+  title = 'Mobile Shop (Demo)';
+  numberItems =  0;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) { }
 
   ngOnInit() {
+    this.cartService.numberItems.subscribe(data => {
+      this.numberItems = data;
+    });
   }
 
   goToCart(): void {

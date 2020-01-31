@@ -23,7 +23,7 @@ export class ProductUpdatingComponent implements OnInit {
   }
 
   onSubmit(data) {
-    this.api.createMobile({
+    this.api.saveMobile({
       name: this.productForm.get('name'),
       description: this.productForm.get('name'),
       price: this.productForm.get('name'),

@@ -1,8 +1,8 @@
+import { ApiService } from './../api.service';
 import { CartService } from './../cart.service';
 import { IProduct } from '../data/product';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { products } from '../data/products';
 
 @Component({
   selector: 'app-product-details',
@@ -14,13 +14,20 @@ export class ProductDetailsComponent implements OnInit {
   product: IProduct;
   constructor(
     private route: ActivatedRoute,
+    private api: ApiService,
     private cartService: CartService
   ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.product = products[+params.get('productId')];
-      this.outOfStock = this.product.instock === 0;
+      this.loadProduct(+params.get('productId'));
+    });
+  }
+
+  loadProduct(id: number) {
+    this.api.getMobileById(id).then(data => {
+      this.product = data;
+      this.outOfStock = this.product && this.product.instock === 0;
     });
   }
 
