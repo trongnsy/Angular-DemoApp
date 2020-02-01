@@ -1,3 +1,4 @@
+import { ApiService } from './../api.service';
 import { CartService } from './../cart.service';
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../data/product';
@@ -10,12 +11,14 @@ import { IProduct } from '../data/product';
 export class CartComponent implements OnInit {
   items: CartItem[] = [];
   constructor(
+    private api: ApiService,
     private cartService: CartService
   ) { }
 
   ngOnInit() {
     this.cartService.getItems().forEach((value, key) => {
       this.items.push({
+        id: key.id,
         name: key.name,
         quantity: value,
         price: key.price * value,
@@ -29,13 +32,31 @@ export class CartComponent implements OnInit {
   }
 
   purchase() {
-    alert('All products are purchased.');
-    this.items = [];
+    const order: Order = { ids: [], quantity: []};
+    this.items.forEach(value => {
+      order.ids.push(value.id);
+      order.quantity.push(value.quantity);
+    });
+
+    this.api.orderMobiles(order)
+      .then(() => {
+        alert('All products are purchased.');
+        this.clearCart();
+      })
+      .catch(error => {
+        alert(error);
+      });
   }
 }
 
 interface CartItem {
+  id: number;
   name: string;
   price: number;
   quantity: number;
+}
+
+interface Order {
+  ids: number[];
+  quantity: number[];
 }

@@ -49,4 +49,13 @@ export class ApiService {
         });
     });
   }
+
+  orderMobiles(order): Promise<IProduct[]> {
+    return new Promise(resolve => {
+      this.http.post(API_URL + '/mobile/order', order).toPromise()
+        .then(data => {
+          resolve(data as IProduct[]);
+        });
+    });
+  }
 }

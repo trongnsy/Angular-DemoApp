@@ -35,6 +35,8 @@ speed-measure-plugin*.json
 BE/.vs
 BE/bin
 BE/obj
+BE/*.user
+BE/*.csproj.user
 
 # misc
 /.sass-cache

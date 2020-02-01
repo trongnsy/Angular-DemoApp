@@ -8,10 +8,10 @@ import { IProduct } from '../data/product';
   styleUrls: ['./searchable-product-table.component.css']
 })
 export class SearchableProductTableComponent implements OnInit {
-  products: IProduct[];
-  filteredProducts: IProduct[];
-  searchText;
-  showInstockOnly;
+  products: IProduct[] = [];
+  filteredProducts: IProduct[] = [];
+  searchText: string;
+  showInstockOnly: boolean;
   constructor(
     private api: ApiService
   ) { }

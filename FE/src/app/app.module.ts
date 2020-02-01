@@ -14,7 +14,6 @@ import { SearchableProductTableComponent } from './searchable-product-table/sear
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { CartComponent } from './cart/cart.component';
-import { ProductUpdatingComponent } from './product-updating/product-updating.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductRowComponent } from './product-row/product-row.component';
 
@@ -27,7 +26,6 @@ import { ProductRowComponent } from './product-row/product-row.component';
     ProductDetailsComponent,
     TopBarComponent,
     CartComponent,
-    ProductUpdatingComponent,
     ProductRowComponent,
   ],
   imports: [
@@ -40,7 +38,6 @@ import { ProductRowComponent } from './product-row/product-row.component';
     RouterModule.forRoot([
       { path: '', component: SearchableProductTableComponent },
       { path: 'products', component: SearchableProductTableComponent },
-      { path: 'products/add', component: ProductUpdatingComponent },
       { path: 'product/:productId', component: ProductDetailsComponent },
       { path: 'cart', component: CartComponent }
     ])

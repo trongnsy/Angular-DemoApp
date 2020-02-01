@@ -3,9 +3,9 @@
         <app-search-bar class="search-bar" (search)="searchTextChange($event)" (showInstockOnly)="checkboxChange($event)"></app-search-bar>
     </div>
 
-    <app-product-table *ngIf="(filteredProducts); else noDataTmpl" [products]="filteredProducts"></app-product-table>
-
-    <ng-template #noDataTmpl>
-        <p>No product is matched with your search!</p>
-    </ng-template>
+    <app-product-table *ngIf="(filteredProducts.length > 0); else noDataTmpl" [products]="filteredProducts"></app-product-table>
 </div>
+
+<ng-template #noDataTmpl>
+    <p>No product is matched with your search!</p>
+</ng-template>

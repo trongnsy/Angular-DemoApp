@@ -12,3 +12,17 @@ img {
     float: left;
     margin-right: 30px;
 }
+
+.product-details-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.left-content {
+    float: left;
+}
+
+.right-content {
+    float: right;
+}

@@ -75,5 +75,30 @@ namespace MobileServices.Controllers
 
             return CreatedAtAction(nameof(GetAll), _context.Mobiles.ToList());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Order(MobileOrder order)
+        {
+            
+
+            for(var i = 0; i < order.Ids.Length; i++)
+            {
+                var id = order.Ids[i];
+                var mobile = await _context.Mobiles.FindAsync(id);
+
+                if (mobile == null)
+                    return NotFound($"Not found mobile with id {id} to this order");
+
+                if (mobile.Instock < order.Quantity[i])
+                    return BadRequest($"Stock is not enough {mobile.Name} to this order.");
+
+                _context.Entry(mobile).State = EntityState.Modified;
+                mobile.Instock -= order.Quantity[i];
+            }
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetAll), _context.Mobiles.ToList());
+        }
     }
 }
