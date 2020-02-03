@@ -1,8 +1,8 @@
-﻿using MobileServices.ViewModels;
+﻿using MobileServices.Models;
 
-namespace MobileServices.Models
+namespace MobileServices.ViewModels
 {
-    public class Mobile
+    public class MobileForm
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -11,9 +11,9 @@ namespace MobileServices.Models
         public string Description { get; set; }
         public string ImageSource { get; set; }
 
-        public Mobile() { }
+        public MobileForm() { }
 
-        public Mobile(MobileForm mobile)
+        public MobileForm(Mobile mobile)
         {
             Id = mobile.Id;
             Name = mobile.Name;

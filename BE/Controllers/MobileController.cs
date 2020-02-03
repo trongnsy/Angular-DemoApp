@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MobileServices.Common;
 using MobileServices.Models;
+using MobileServices.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,42 +25,49 @@ namespace MobileServices.Controllers
 
 
         [HttpGet]
-        public IEnumerable<Mobile> GetAll()
+        public IEnumerable<MobileForm> GetAll()
         {
             _logger.LogInformation("GetAll is called");
 
-            return _context.Mobiles.ToList();
+            return _context.Mobiles.Select(mobile => new MobileForm(mobile)).ToList();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Mobile>> GetById(int id)
+        public async Task<ActionResult<MobileForm>> GetById(int id)
         {
             _logger.LogInformation("GetById is called");
             var mobile = await _context.Mobiles.FindAsync(id);
 
-            return mobile == null ? NotFound() : (ActionResult<Mobile>)mobile;
+            return mobile == null ? NotFound() : (ActionResult<MobileForm>)new MobileForm(mobile);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(Mobile mobile)
+        public async Task<IActionResult> Add(MobileForm form)
         {
-            if (mobile.Id == 0)
-            {
-                _logger.LogInformation("Create new mobile is called");
-                _context.Mobiles.Add(mobile);
-            }
-            else
-            {
-                if (await _context.Mobiles.FindAsync(mobile.Id) == null)
-                    return NotFound("Not found mobile to update");
+            if (form.Id != 0)
+                return BadRequest($"Can not add new mobile with Id");
 
-                _logger.LogInformation("Update a mobile is called");
-                _context.Entry(mobile).State = EntityState.Modified;
-            }
+            _logger.LogInformation("Create new mobile is called");
+            
+            _context.Mobiles.Add(new Mobile(form));
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetById), new { id = form.Id }, form);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(MobileForm form)
+        {
+            var mobile = await _context.Mobiles.FindAsync(form.Id);
+            if (mobile == null)
+                return NotFound("Not found mobile to update");
+
+            _logger.LogInformation("Update a mobile is called");
+            _context.Entry(mobile).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetById), new { id = mobile.Id }, mobile);
+            return CreatedAtAction(nameof(GetById), new { id = form.Id }, form);
         }
 
         [HttpDelete("{id}")]
@@ -79,9 +87,7 @@ namespace MobileServices.Controllers
         [HttpPost]
         public async Task<IActionResult> Order(MobileOrder order)
         {
-            
-
-            for(var i = 0; i < order.Ids.Length; i++)
+            for (var i = 0; i < order.Ids.Length; i++)
             {
                 var id = order.Ids[i];
                 var mobile = await _context.Mobiles.FindAsync(id);
