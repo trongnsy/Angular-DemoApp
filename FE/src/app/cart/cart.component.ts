@@ -16,7 +16,7 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cartService.getItems().forEach((value, key) => {
+    this.cartService.getCartItems().forEach((value, key) => {
       this.items.push({
         id: key.id,
         name: key.name,

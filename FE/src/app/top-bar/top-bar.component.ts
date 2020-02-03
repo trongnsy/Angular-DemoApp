@@ -1,5 +1,5 @@
 import { CartService } from './../cart.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class TopBarComponent implements OnInit {
   title = 'Mobile Shop (Demo)';
   numberItems =  0;
+  subcription: Subscription;
 
   constructor(
     private router: Router,
@@ -18,7 +19,7 @@ export class TopBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cartService.numberItems.subscribe(data => {
+    this.subcription = this.cartService.numberItems.subscribe(data => {
       this.numberItems = data;
     });
   }
@@ -30,4 +31,10 @@ export class TopBarComponent implements OnInit {
   goToList(): void {
     this.router.navigate(['']);
   }
+
+  // tslint:disable-next-line:use-lifecycle-interface
+  ngOnDestroy()	{
+    this.subcription.unsubscribe();
+  }
+
 }

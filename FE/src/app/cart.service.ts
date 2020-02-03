@@ -27,7 +27,7 @@ export class CartService {
     this.numberItems.next(++this.count);
   }
 
-  getItems(): Map<IProduct, number> {
+  getCartItems(): Map<IProduct, number> {
     return this.items;
   }
 
